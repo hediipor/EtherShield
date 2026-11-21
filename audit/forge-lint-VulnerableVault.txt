@@ -1,0 +1,19 @@
+Compiling 1 files with Solc 0.8.24
+Solc 0.8.24 finished in 12.74ms
+Compiler run successful!
+warning[reentrancy-eth]: uncapped ETH transfer can be reentered before `balances` is updated
+   ╭▸ src/vulnerable/VulnerableVault.sol:20:22
+   │
+20 │         (bool ok,) = msg.sender.call{value: amount}("");
+   │                      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   │
+   ╰ help: https://getfoundry.sh/forge/linting/reentrancy-eth
+
+warning[reentrancy-events]: event emitted after an external call; reentrancy can reorder or fabricate logs that off-chain consumers rely on
+   ╭▸ src/vulnerable/VulnerableVault.sol:24:9
+   │
+24 │         emit Withdraw(msg.sender, amount);
+   │         ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   │
+   ╰ help: https://getfoundry.sh/forge/linting/reentrancy-events
+
