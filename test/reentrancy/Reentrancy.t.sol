@@ -26,9 +26,7 @@ contract ReentrancyTest is Test {
 
         // 2. Attack: hedisarrek deploys her contract and attacks with 1 ETH
         vm.startPrank(hedisarrek);
-        ReentrancyAttacker attacker = new ReentrancyAttacker(
-            IVault(address(vault))
-        );
+        ReentrancyAttacker attacker = new ReentrancyAttacker(IVault(address(vault)));
         attacker.attack{value: 1 ether}();
         attacker.loot();
         vm.stopPrank();
@@ -54,9 +52,7 @@ contract ReentrancyTest is Test {
         vault.deposit{value: 10 ether}();
 
         vm.startPrank(hedisarrek);
-        ReentrancyAttacker attacker = new ReentrancyAttacker(
-            IVault(address(vault))
-        );
+        ReentrancyAttacker attacker = new ReentrancyAttacker(IVault(address(vault)));
         vm.expectRevert(); // the attack must fail
         attacker.attack{value: 1 ether}();
         vm.stopPrank();

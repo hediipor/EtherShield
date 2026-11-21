@@ -19,7 +19,7 @@ contract FixedVault {
         balances[msg.sender] = 0;
         emit Withdraw(msg.sender, amount);
 
-        (bool ok, ) = msg.sender.call{value: amount}("");
+        (bool ok,) = msg.sender.call{value: amount}("");
         require(ok, "transfer failed");
     }
 }
