@@ -1,7 +1,8 @@
 // SPDX-License-Identifier: MIT
 pragma solidity 0.8.24;
+import {ReentrancyGuard} from "@openzeppelin/contracts/utils/ReentrancyGuard.sol";
 
-contract FixedVault {
+contract FixedVault is ReentrancyGuard {
     mapping(address => uint256) public balances;
 
     event Deposit(address indexed user, uint256 amount);
@@ -12,14 +13,14 @@ contract FixedVault {
         emit Deposit(msg.sender, msg.value);
     }
 
-    function withdraw() external {
+    function withdraw() external nonReentrant {
         uint256 amount = balances[msg.sender];
         require(amount > 0, "nothing to withdraw");
 
         balances[msg.sender] = 0;
         emit Withdraw(msg.sender, amount);
 
-        (bool ok,) = msg.sender.call{value: amount}("");
+        (bool ok, ) = msg.sender.call{value: amount}("");
         require(ok, "transfer failed");
     }
 }
