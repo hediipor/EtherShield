@@ -1,6 +1,62 @@
-Compiling 24 files with Solc 0.8.24
-Solc 0.8.24 finished in 785.54ms
+Compiling 38 files with Solc 0.8.24
+Solc 0.8.24 finished in 953.74ms
 Compiler run successful!
+warning[missing-zero-check]: address parameter is used in a state write or value transfer without a zero-address check
+   ╭▸ src/fixed/FixedFeeVault.sol:16:17
+   │
+16 │     constructor(address _feeRecipient) {
+   │                 ━━━━━━━━━━━━━━━━━━━━━
+   │
+   ╰ help: https://getfoundry.sh/forge/linting/missing-zero-check
+
+warning[arbitrary-send-eth]: ETH is sent to a user-controlled destination; restrict the destination or the caller
+   ╭▸ src/fixed/FixedFeeVault.sol:41:24
+   │
+41 │         (bool ok1, ) = feeRecipient.call{value: fee}("");
+   │                        ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   │
+   ╰ help: https://getfoundry.sh/forge/linting/arbitrary-send-eth
+
+warning[reentrancy-eth]: uncapped ETH transfer can be reentered before `_status` is updated
+   ╭▸ src/fixed/FixedVault.sol:23:23
+   │
+23 │         (bool ok, ) = msg.sender.call{value: amount}("");
+   │                       ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   │
+   ╰ help: https://getfoundry.sh/forge/linting/reentrancy-eth
+
+warning[arbitrary-send-eth]: ETH is sent to a user-controlled destination; restrict the destination or the caller
+   ╭▸ src/fixed/RoleFeeVault.sol:48:24
+   │
+48 │         (bool ok1, ) = feeRecipient.call{value: fee}("");
+   │                        ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   │
+   ╰ help: https://getfoundry.sh/forge/linting/arbitrary-send-eth
+
+warning[missing-zero-check]: address parameter is used in a state write or value transfer without a zero-address check
+   ╭▸ src/vulnerable/VulnerableFeeVault.sol:16:17
+   │
+16 │     constructor(address _feeRecipient) {
+   │                 ━━━━━━━━━━━━━━━━━━━━━
+   │
+   ╰ help: https://getfoundry.sh/forge/linting/missing-zero-check
+
+warning[arbitrary-send-eth]: ETH is sent to a user-controlled destination; restrict the destination or the caller
+   ╭▸ src/vulnerable/VulnerableFeeVault.sol:36:24
+   │
+36 │         (bool ok1, ) = feeRecipient.call{value: fee}("");
+   │                        ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   │
+   ╰ help: https://getfoundry.sh/forge/linting/arbitrary-send-eth
+
+warning[missing-zero-check]: address parameter is used in a state write or value transfer without a zero-address check
+   ╭▸ src/vulnerable/VulnerableFeeVault.sol:49:30
+   │
+49 │     function setFeeRecipient(address newRecipient) external {
+   │                              ━━━━━━━━━━━━━━━━━━━━
+   │
+   ╰ help: https://getfoundry.sh/forge/linting/missing-zero-check
+
 warning[reentrancy-eth]: uncapped ETH transfer can be reentered before `balances` is updated
    ╭▸ src/vulnerable/VulnerableVault.sol:20:22
    │
@@ -14,6 +70,38 @@ warning[reentrancy-events]: event emitted after an external call; reentrancy can
    │
 24 │         emit Withdraw(msg.sender, amount);
    │         ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   │
+   ╰ help: https://getfoundry.sh/forge/linting/reentrancy-events
+
+warning[tx-origin]: `tx.origin` is used for authorization
+   ╭▸ src/vulnerable/VulnerableWallet.sol:17:17
+   │
+17 │         require(tx.origin == owner, "not owner");
+   │                 ━━━━━━━━━━━━━━━━━━
+   │
+   ╰ help: https://getfoundry.sh/forge/linting/tx-origin
+
+warning[arbitrary-send-eth]: ETH is sent to a user-controlled destination; restrict the destination or the caller
+   ╭▸ src/vulnerable/VulnerableWallet.sol:18:23
+   │
+18 │         (bool ok, ) = to.call{value: amount}("");
+   │                       ━━━━━━━━━━━━━━━━━━━━━━━━━━
+   │
+   ╰ help: https://getfoundry.sh/forge/linting/arbitrary-send-eth
+
+warning[missing-zero-check]: address parameter is used in a state write or value transfer without a zero-address check
+   ╭▸ src/vulnerable/VulnerableWallet.sol:16:25
+   │
+16 │     function transferTo(address payable to, uint256 amount) external {
+   │                         ━━━━━━━━━━━━━━━━━━
+   │
+   ╰ help: https://getfoundry.sh/forge/linting/missing-zero-check
+
+warning[reentrancy-events]: event emitted after an external call; reentrancy can reorder or fabricate logs that off-chain consumers rely on
+   ╭▸ src/vulnerable/VulnerableWallet.sol:20:9
+   │
+20 │         emit Transfer(to, amount);
+   │         ━━━━━━━━━━━━━━━━━━━━━━━━━━
    │
    ╰ help: https://getfoundry.sh/forge/linting/reentrancy-events
 

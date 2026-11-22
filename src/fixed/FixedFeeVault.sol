@@ -14,6 +14,7 @@ contract FixedFeeVault {
     event FeeRecipientChanged(address newRecipient);
 
     constructor(address _feeRecipient) {
+        require(_feeRecipient != address(0), "zero address");
         owner = msg.sender;
         feeRecipient = _feeRecipient;
         feeBps = 100; // 1%
